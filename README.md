@@ -85,7 +85,7 @@ Current Month Cost
      $1.50
 
 The backend retrieves cost information directly from AWS.
-
+```
 2. 📊 Cost by AWS Service
 
 The platform analyzes AWS spending and groups costs by service.
@@ -99,7 +99,7 @@ Amazon EKS               $0.40
 Elastic Load Balancer    $0.20
 Amazon ECR               $0.10
 Other                    $0.00
-
+```
 This helps identify which AWS services contribute the most to cloud expenditure.
 
 3. 📈 Daily Cost History
@@ -117,7 +117,7 @@ Date          Cost
 2026-09-11    $0.19
 
 The frontend displays the historical data using charts.
-
+```
 🚨 4. Cost Anomaly Detection
 
 The platform analyzes historical cost data to identify unusual spending patterns.
@@ -129,7 +129,7 @@ Mean Cost + (2 × Standard Deviation)
 If a daily cost exceeds the calculated threshold, it is identified as a potential anomaly.
 
 Example:
-
+```text
 Normal Daily Cost
        ↓
      $0.20
@@ -141,12 +141,13 @@ Detected Cost
 Status
        ↓
 ⚠️ Unusual spending detected
+```
 🔮 5. Cost Forecasting
 
 The application estimates future monthly AWS spending based on the current average daily cost.
 
 Conceptually:
-
+```text
 Average Daily Cost
         ×
 Number of Days in Month
@@ -160,7 +161,7 @@ Average Daily Cost: $0.25
 Estimated Monthly Cost: $7.50
 
 This helps users understand potential future cloud expenditure.
-
+```
 💡 6. Cost Optimization Recommendations
 
 The platform analyzes AWS service costs and generates recommendations based on spending patterns.
@@ -195,7 +196,7 @@ PostgreSQL
                 ├── service
                 └── cost
 This allows the application to maintain historical cost information.
-
+```
 🛠️ Technology Stack
 ☁️ Cloud
 AWS
@@ -236,6 +237,8 @@ Git
 GitHub
 
 🔄 Application Workflow
+
+      ```text
                     User
                      │
                      ▼
@@ -243,7 +246,7 @@ GitHub
                      │
                      ▼
               FastAPI Backend
-                     │
+   ```text
           ┌──────────┴──────────┐
           │                     │
           ▼                     ▼
@@ -264,7 +267,7 @@ GitHub
         └────────────┼────────────┘
                      ▼
               React Dashboard
-
+```
 🐳 Docker
 
 The frontend and backend applications are containerized using Docker.
@@ -286,7 +289,7 @@ The React application is built for production and served using Nginx.
 The project can also be run locally using Docker Compose.
 
 Architecture:
-
+```text
 Frontend
     │
     ▼
@@ -302,7 +305,7 @@ docker compose up --build
 Stop the application:
 
 docker compose down
-
+```
 ☸️ Kubernetes Deployment
 
 The application was designed to run on Kubernetes/Amazon EKS.
@@ -490,7 +493,7 @@ The project uses **GitHub Actions** to automate the application build, testing, 
 │  Frontend + Backend  │
 └──────────────────────┘
 This demonstrates Continuous Integration and Continuous Deployment practices.
-
+```
 🧪 Local Development
 Backend
 
@@ -574,6 +577,7 @@ The dashboard provides a centralized view of AWS cloud expenditure.
 │   Optimization Recommendations          │
 │                                         │
 └─────────────────────────────────────────┘
+```
 🧠 DevOps Concepts Demonstrated
 Cloud Computing
 AWS
@@ -684,6 +688,7 @@ Containerized frontend and backend applications using Docker and deployed worklo
 Provisioned AWS infrastructure using Terraform and implemented CI/CD workflows using GitHub Actions.
 Used PostgreSQL with SQLAlchemy to persist historical AWS cost data.
 ⭐ Project Highlights
+```text
                      AWS
                       │
         ┌─────────────┼─────────────┐
@@ -716,6 +721,7 @@ Used PostgreSQL with SQLAlchemy to persist historical AWS cost data.
  ▼     ▼         ▼
 Anomaly Forecast Optimization
 Detection        Recommendations
+```
 👨‍💻 Author
 
 Sagar Gore
