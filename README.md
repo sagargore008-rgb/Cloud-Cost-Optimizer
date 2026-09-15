@@ -77,7 +77,7 @@ The **Cloud Cost Optimizer** provides a centralized dashboard to:
 1. 💰 Current AWS Cost
 
 The application integrates with AWS Cost Explorer to retrieve the current month's AWS expenditure.
-
+```text
 Example:
 
 Current Month Cost
@@ -89,7 +89,7 @@ The backend retrieves cost information directly from AWS.
 2. 📊 Cost by AWS Service
 
 The platform analyzes AWS spending and groups costs by service.
-
+```text
 Example:
 
 Service                  Cost
@@ -105,7 +105,7 @@ This helps identify which AWS services contribute the most to cloud expenditure.
 3. 📈 Daily Cost History
 
 The application retrieves daily AWS spending and stores historical records in PostgreSQL.
-
+```text
 Example:
 
 Date          Cost
@@ -178,20 +178,22 @@ Review whether the Load Balancer is still required.
 
 The objective is to help identify potential cloud cost-saving opportunities.
 
-🗄️ 7. PostgreSQL Cost Storage
+# 🗄️ 7. PostgreSQL Cost Storage
 
-Historical AWS cost information is stored in PostgreSQL.
+Historical AWS cost information is stored in **PostgreSQL** to maintain cost records and support historical analysis, anomaly detection, and forecasting.
 
-Database structure:
+### Database Structure
 
+```text
 PostgreSQL
     │
-    └── cost_records
-          ├── id
-          ├── date
-          ├── service
-          └── cost
-
+    └── cloud_cost_optimizer
+          │
+          └── cost_records
+                ├── id
+                ├── date
+                ├── service
+                └── cost
 This allows the application to maintain historical cost information.
 
 🛠️ Technology Stack
@@ -327,20 +329,32 @@ Terraform was used to provision the AWS infrastructure.
 
 Main AWS components include:
 
-AWS VPC
-   │
-   ├── Public Subnet
-   │
-   ├── Public Subnet
-   │
-   └── Internet Gateway
-          │
-          ▼
-         EKS
-          │
-     ┌────┴────┐
-     ▼         ▼
- Backend    Frontend
+# ☁️ AWS VPC Infrastructure
+
+The project uses **Amazon Virtual Private Cloud (VPC)** to create an isolated and secure network environment for the cloud infrastructure.
+
+### VPC Architecture
+
+
+                       AWS VPC
+                    10.0.0.0/16
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+              ▼                     ▼
+       ┌──────────────┐      ┌──────────────┐
+       │ Public       │      │ Public       │
+       │ Subnet 1     │      │ Subnet 2     │
+       │ 10.0.1.0/24  │      │ 10.0.2.0/24  │
+       └──────┬───────┘      └──────┬───────┘
+              │                     │
+              └──────────┬──────────┘
+                         │
+                         ▼
+                 Internet Gateway
+                         │
+                         ▼
+                      Internet
 
 AWS services used:
 
@@ -394,26 +408,87 @@ These files should be excluded using .gitignore.
 
 🔄 CI/CD Pipeline
 
-GitHub Actions can automate the application lifecycle.
+# 🔄 CI/CD Workflow
 
-Workflow:
+The project uses **GitHub Actions** to automate the application build, testing, Docker image creation, and deployment process.
 
-Developer
-    │
-    ▼
-Git Push
-    │
-    ▼
-GitHub Repository
-    │
-    ▼
-GitHub Actions
-    │
-    ├── Build
-    ├── Test
-    ├── Docker Build
-    └── Deployment
+### CI/CD Pipeline
 
+```text
+┌──────────────────────┐
+│      Developer       │
+│                      │
+│   Code Changes       │
+└──────────┬───────────┘
+           │
+           │ git push
+           ▼
+┌──────────────────────┐
+│   GitHub Repository  │
+│                      │
+│  Cloud-Cost-Optimizer│
+└──────────┬───────────┘
+           │
+           │ Trigger
+           ▼
+┌──────────────────────┐
+│    GitHub Actions    │
+│       Workflow       │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│   Checkout Code      │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│   Build Application  │
+│                      │
+│ Frontend + Backend   │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│       Testing        │
+│                      │
+│  Build / Validation  │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│    Docker Build      │
+│                      │
+│ Frontend + Backend   │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│    Docker Images     │
+│                      │
+│   Build & Tag        │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│   Container Registry │
+│      Amazon ECR      │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│    Amazon EKS        │
+│     Kubernetes       │
+│                      │
+│  Deploy Application  │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│   Running Application│
+│                      │
+│  Frontend + Backend  │
+└──────────────────────┘
 This demonstrates Continuous Integration and Continuous Deployment practices.
 
 🧪 Local Development
@@ -469,33 +544,34 @@ DATABASE_URL=postgresql://USERNAME:PASSWORD@localhost:5432/cloud_cost_optimizer
 
 Do not commit .env to GitHub.
 
-📊 Dashboard
+# 📊 Dashboard
 
 The dashboard provides a centralized view of AWS cloud expenditure.
 
-Main sections include:
+### Main Dashboard Sections
 
+```text
 ┌─────────────────────────────────────────┐
-│        Cloud Cost Optimizer             │
+│         Cloud Cost Optimizer            │
 ├─────────────────────────────────────────┤
 │                                         │
-│ Current Cost       Forecast              │
-│                                         │
-├─────────────────────────────────────────┤
-│                                         │
-│ Cost by AWS Service                     │
+│   Current Cost          Forecast        │
 │                                         │
 ├─────────────────────────────────────────┤
 │                                         │
-│ Daily Cost Trend                         │
+│        Cost by AWS Service              │
 │                                         │
 ├─────────────────────────────────────────┤
 │                                         │
-│ Anomaly Detection                        │
+│          Daily Cost Trend               │
 │                                         │
 ├─────────────────────────────────────────┤
 │                                         │
-│ Optimization Recommendations             │
+│          Anomaly Detection              │
+│                                         │
+├─────────────────────────────────────────┤
+│                                         │
+│   Optimization Recommendations          │
 │                                         │
 └─────────────────────────────────────────┘
 🧠 DevOps Concepts Demonstrated
