@@ -233,59 +233,6 @@ GitHub Actions
 Git
 GitHub
 
-📁 Project Structure
-cloud-cost-optimizer/
-│
-├── backend/
-│   ├── app/
-│   │   ├── anomaly/
-│   │   │   └── detector.py
-│   │   │
-│   │   ├── aws/
-│   │   │   └── cost_explorer.py
-│   │   │
-│   │   ├── forecast/
-│   │   │   └── calculator.py
-│   │   │
-│   │   ├── optimization/
-│   │   │   └── recommender.py
-│   │   │
-│   │   ├── database.py
-│   │   ├── models.py
-│   │   └── main.py
-│   │
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── .env
-│
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   └── ...
-│   │
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   ├── package.json
-│   └── vite.config.js
-│
-├── terraform/
-│   ├── main.tf
-│   ├── variables.tf
-│   ├── outputs.tf
-│   └── ...
-│
-├── k8s/
-│   ├── namespace.yaml
-│   ├── backend-deployment.yaml
-│   ├── backend-service.yaml
-│   ├── frontend-deployment.yaml
-│   ├── frontend-service.yaml
-│   └── ...
-│
-├── docker-compose.yml
-├── .gitignore
-└── README.md
-
 🔄 Application Workflow
                     User
                      │
